@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sea summer - Thời trang và phụ kiện đi biển</title>
+    <style>
+        /* --- Cài đặt chung & Fonts --- */
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
+
+        :root {
+            --primary-color: #0077b6; /* Xanh dương đậm */
+            --secondary-color: #90e0ef; /* Xanh nhạt */
+            --text-color: #03045e; /* Xanh navy */
+            --bg-color: #caf0f8; /* Nền xanh rất nhạt */
+            --card-bg: #FFFFFF;
+            --gradient: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            /* background-color: var(--bg-color); */
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('https://wallpaperaccess.com/full/8689682.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1600px; /* Rộng hơn để chứa 6 sản phẩm */
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-color);
+        }
+
+        /* --- Header & Navigation --- */
+        .header {
+            /* background: var(--card-bg); */
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('https://wallpaperaccess.com/full/8689682.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 119, 182, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 119, 182, 0.5);
+        }
+
+        /* --- Product Section (Phần sản phẩm) --- */
+        .products {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Mobile: 2 cột */
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 119, 182, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 119, 182, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            flex-grow: 1; /* Giúp các card có chiều cao bằng nhau */
+        }
+
+        .shopee-button {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: auto; /* Đẩy nút xuống cuối card */
+            border: none;
+        }
+
+        .shopee-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 119, 182, 0.3);
+        }
+
+        /* --- Responsive Grid --- */
+        @media (min-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr); /* Tablet: 3 cột */
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .product-grid {
+                grid-template-columns: repeat(6, 1fr); /* PC: 6 cột */
+            }
+            .product-image {
+                height: 250px;
+            }
+        }
+
+        /* --- Popup --- */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: none; /* Ẩn mặc định */
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .popup-content {
+            background: var(--card-bg);
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2.5rem;
+            color: #aaa;
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .popup-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .popup-content .cta-button {
+            margin-top: 1.5rem;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            /* background: var(--primary-color); */
+            color: var(--text-color);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('https://wallpaperaccess.com/full/8689682.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ======================== HEADER ======================== -->
+    <header class="header">
+        <nav class="container navbar">
+            <a href="#" class="logo redirect-shopee">Sea summer</a>
+        </nav>
+    </header>
+
+    <!-- ======================== PRODUCT SECTION ======================== -->
+    <main class="container products">
+        <h2 class="section-title">Bộ Sưu Tập Nổi Bật</h2>
+
+        <div class="product-grid">
+
+            <!-- SẢN PHẨM 1 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mos5m9smxxxcc1@resize_w900_nl.webp" alt="Áo BabyDoll Trễ Hở Vai" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Áo BabyDoll Trễ Hở Vai</h3>
+                    <a href="https://s.shopee.vn/50Wukn1ItY" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 2 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/e8acaa5c6da0297d279345002a11f096@resize_w900_nl.webp" alt="Miếng dán ngực" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Miếng dán ngực</h3>
+                    <a href="https://s.shopee.vn/2VpZmHVHUk" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 3 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rasz-mams2dfvq3ub9d@resize_w900_nl.webp" alt="Hoa, Sao biển kẹp tóc" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Hoa, Sao biển kẹp tóc</h3>
+                    <a href="https://s.shopee.vn/70Hz8Z55H9" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 4 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134258-81ztc-mpm058g70vsw33" alt="Dép xỏ nữ chấm bi" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Dép xỏ nữ chấm bi</h3>
+                    <a href="https://s.shopee.vn/2VpZmKhGhl" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 5 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rdwh-lxpl95xdl8wc1a@resize_w900_nl.webp" alt="Set mũ và túi mix nơ ren" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Set mũ và túi mix nơ ren</h3>
+                    <a href="https://s.shopee.vn/9fIkJWbEip" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 6 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mmko7nxs1hqn4b.webp" alt="Dép tông hoa" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Dép tông hoa</h3>
+                    <a href="https://s.shopee.vn/4fu4MN2siY" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 7 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mloupo2py3np29@resize_w900_nl.webp" alt="Quần short thể thao nữ" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Quần short thể thao nữ</h3>
+                    <a href="https://s.shopee.vn/gNvb2efMF" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 8 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134258-81ztc-mpm0cuj726ffe7" alt="Bikini sọc ngang" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Bikini sọc ngang</h3>
+                    <a href="https://s.shopee.vn/4VaeA6YT6F" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 9 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mma3xvfbtwci2e@resize_w900_nl.webp" alt="Vòng cổ vỏ sò" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Vòng cổ vỏ sò</h3>
+                    <a href="https://s.shopee.vn/18EnqfQwu" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 10 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mmh7ih65rbiac3@resize_w900_nl.webp" alt="Vòng eo sao biển" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Vòng eo sao biển</h3>
+                    <a href="https://s.shopee.vn/6VLiXoSaem" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 11 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134258-81ztc-mpm04b8vrpcb7c" alt="Kính râm đi biển" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Kính râm đi biển</h3>
+                    <a href="https://s.shopee.vn/3Vi6yLU02e" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 12 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134258-81ztc-mpm04b8vrpcb7c" alt="Áo 2 dây xòe hở lưng" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Áo 2 dây xòe hở lưng</h3>
+                    <a href="https://s.shopee.vn/W4VOqbEfD" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 13 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/sg-11134201-82604-mmbhddi0ka2s65@resize_w900_nl.webp" alt="Vòng cổ ốc, sao biển biển" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Vòng cổ ốc, sao biển biển</h3>
+                    <a href="https://s.shopee.vn/5fmbYMdR5x" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 14 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134258-81ztc-mpm0cuj726ffe7" alt="Kem chống nắng" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Kem chống nắng</h3>
+                    <a href="https://s.shopee.vn/8V6mveDIFY" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 15 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/6a7f75e9fe4add5250b903b9b4d32a06.webp" alt="Túi đựng điện thoại chống nước" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Túi đựng điện thoại chống nước</h3>
+                    <a href="https://s.shopee.vn/3g1XAoa3AF" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 16 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mouxznkqymfj2a@resize_w900_nl.webp" alt="Dép tông đi biển" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Dép tông đi biển</h3>
+                    <a href="https://s.shopee.vn/6pyYwg3sUZ" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 17 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-m40mw7rdh1281e@resize_w900_nl.webp" alt="Mũ cói viền ren" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Mũ cói viền ren</h3>
+                    <a href="https://s.shopee.vn/4qDUZ4fZG2" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 18 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mcoyec7o08tpad@resize_w900_nl.webp" alt="Váy đi biển cho nàng thơ" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Váy đi biển cho nàng thơ</h3>
+                    <a href="https://s.shopee.vn/AUrrJZHDeM" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 19 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134201-81ztc-moqm2rkruxhpd4.webp" alt="Chân váy chấm bi" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Chân váy chấm bi</h3>
+                    <a href="https://s.shopee.vn/70Hz9AuGsn" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 20 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mcoyec7o08tpad.webp" alt="Set yếm hở lưng" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Set yếm hở lưng</h3>
+                    <a href="https://s.shopee.vn/2VpZmvNRQv" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 21 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134258-81ztc-mpm00dv1m3gt23" alt="Set áo croptop trể vai" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Set áo croptop trể vai</h3>
+                    <a href="https://s.shopee.vn/4LHDyNT153" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 22 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-megrf25yq32acd@resize_w900_nl.webp" alt="Set váy 2 dây họa tiết" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Set váy 2 dây họa tiết</h3>
+                    <a href="https://s.shopee.vn/9UzK7tcIWv" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 23 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mesjdinl6kub2c@resize_w900_nl.webp" alt="Đầm đi biển" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Đầm đi biển</h3>
+                    <a href="https://s.shopee.vn/70Hz9KGHI1" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+            <!-- SẢN PHẨM 24 -->
+            <div class="product-card">
+                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7ras8-mbtmaq2siavi5c@resize_w900_nl.webp" alt="Áo lưới ren che người" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Áo lưới ren che người</h3>
+                    <a href="https://s.shopee.vn/3qKxNWoL9t" class="shopee-button" target="_blank">Xem trên Shopee</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ======================== FOOTER ======================== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Sea summer. All Rights Reserved.</p>
+            <p>Theo dõi chúng tôi trên mạng xã hội!</p>
+        </div>
+    </footer>
+
+    <!-- ======================== POPUP ======================== -->
+    <div id="popup-overlay" class="popup-overlay">
+        <div class="popup-content">
+            <button id="popup-close" class="popup-close">&times;</button>
+            <h2>🎉 Ưu Đãi Đặc Biệt! 🎉</h2>
+            <p>Ghé thăm gian hàng Shopee của chúng tôi để nhận ngay voucher độc quyền và khám phá thêm nhiều sản phẩm hấp dẫn!</p>
+            <a id="popup-cta" href="#" class="cta-button">Đến Shopee Ngay</a>
+        </div>
+    </div>
+
+    <script>
+        // --- CẤU HÌNH ---
+        // !!! QUAN TRỌNG: THAY LINK SHOPPEE CỦA BẠN VÀO ĐÂY !!!
+        const shopeeLink = 'https://s.shopee.vn/50Wukn1ItY'; 
+
+        // --- LOGIC POPUP QUẢNG CÁO ---
+        const popupOverlay = document.getElementById('popup-overlay');
+        const popupClose = document.getElementById('popup-close');
+        const popupCta = document.getElementById('popup-cta');
+
+        // Hàm mở link Shopee và đóng popup
+        const openShopeeAndClosePopup = (e) => {
+            if (e) e.preventDefault();
+            window.open(shopeeLink, '_blank');
+            popupOverlay.style.display = 'none';
+        };
+
+        // Hiện popup sau 1.5 giây khi trang tải xong
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (popupOverlay) {
+                    popupOverlay.style.display = 'flex';
+                }
+            }, 1500);
+        });
+
+        // Gắn sự kiện click cho các thành phần của popup
+        // Bất kỳ click nào cũng sẽ mở link Shopee
+        if (popupOverlay) popupOverlay.addEventListener('click', (event) => {
+            // Chỉ kích hoạt khi click vào nền mờ
+            if (event.target === popupOverlay) {
+                openShopeeAndClosePopup();
+            }
+        });
+        if (popupClose) popupClose.addEventListener('click', openShopeeAndClosePopup);
+        if (popupCta) popupCta.addEventListener('click', openShopeeAndClosePopup);
+
+
+        // --- LOGIC CHUYỂN HƯỚNG TẤT CẢ CÁC NÚT ---
+        // Gán một class chung 'redirect-shopee' cho tất cả các thẻ <a> cần chuyển hướng
+        const allRedirectLinks = document.querySelectorAll('.redirect-shopee');
+
+        allRedirectLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault(); // Ngăn hành vi mặc định (vd: nhảy trang)
+                window.open(shopeeLink, '_blank');
+            });
+        });
+    </script>
+
+</body>
+</html>
