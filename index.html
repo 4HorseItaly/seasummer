@@ -501,42 +501,6 @@
     </div>
 
     <script>
-        // --- CẤU HÌNH ---
-        // !!! QUAN TRỌNG: THAY LINK SHOPPEE CỦA BẠN VÀO ĐÂY !!!
-        const shopeeLink = 'https://s.shopee.vn/50Wukn1ItY'; 
-
-        // --- LOGIC POPUP QUẢNG CÁO ---
-        const popupOverlay = document.getElementById('popup-overlay');
-        const popupClose = document.getElementById('popup-close');
-        const popupCta = document.getElementById('popup-cta');
-
-        // Hàm mở link Shopee và đóng popup
-        const openShopeeAndClosePopup = (e) => {
-            if (e) e.preventDefault();
-            window.open(shopeeLink, '_blank');
-            popupOverlay.style.display = 'none';
-        };
-
-        // Hiện popup sau 1.5 giây khi trang tải xong
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                if (popupOverlay) {
-                    popupOverlay.style.display = 'flex';
-                }
-            }, 1500);
-        });
-
-        // Gắn sự kiện click cho các thành phần của popup
-        // Bất kỳ click nào cũng sẽ mở link Shopee
-        if (popupOverlay) popupOverlay.addEventListener('click', (event) => {
-            // Chỉ kích hoạt khi click vào nền mờ
-            if (event.target === popupOverlay) {
-                openShopeeAndClosePopup();
-            }
-        });
-        if (popupClose) popupClose.addEventListener('click', openShopeeAndClosePopup);
-        if (popupCta) popupCta.addEventListener('click', openShopeeAndClosePopup);
-
 
         // --- LOGIC CHUYỂN HƯỚNG TẤT CẢ CÁC NÚT ---
         // Gán một class chung 'redirect-shopee' cho tất cả các thẻ <a> cần chuyển hướng
