@@ -490,29 +490,7 @@
         </div>
     </footer>
 
-    <!-- ======================== POPUP ======================== -->
-    <div id="popup-overlay" class="popup-overlay">
-        <div class="popup-content">
-            <button id="popup-close" class="popup-close">&times;</button>
-            <h2>🎉 Ưu Đãi Đặc Biệt! 🎉</h2>
-            <p>Ghé thăm gian hàng Shopee của chúng tôi để nhận ngay voucher độc quyền và khám phá thêm nhiều sản phẩm hấp dẫn!</p>
-            <a id="popup-cta" href="#" class="cta-button">Đến Shopee Ngay</a>
-        </div>
-    </div>
 
-    <script>
-
-        // --- LOGIC CHUYỂN HƯỚNG TẤT CẢ CÁC NÚT ---
-        // Gán một class chung 'redirect-shopee' cho tất cả các thẻ <a> cần chuyển hướng
-        const allRedirectLinks = document.querySelectorAll('.redirect-shopee');
-
-        allRedirectLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault(); // Ngăn hành vi mặc định (vd: nhảy trang)
-                window.open(shopeeLink, '_blank');
-            });
-        });
-    </script>
-
+   
 </body>
 </html>
